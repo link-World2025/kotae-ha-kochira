@@ -178,28 +178,33 @@
   const botaoSair = document.getElementById("botaoSair");
 
   botao.addEventListener("click", function () {
-    const mensagem = "答えはズバリ、600台中80台以上の②YANMAR Fシリーズです。";
+    const mensagem = "答えはズバリ、600台中80台以上の②YANMAR Fシリーズです。<br>ちなみにブルガリアへ最も売り上げたメーカーは現時点ではKUBOTAになります。";
     let i = 0;
-    texto.textContent = "";
+    texto.innerHTML = "";
     texto.style.opacity = 1;
     botao.disabled = true;
 
     const intervalo = setInterval(() => {
       if (i < mensagem.length) {
-        texto.textContent += mensagem.charAt(i);
-        i++;
+        if (mensagem.substr(i, 4) === "<br>") {
+          texto.innerHTML += "<br>";
+          i += 4;
+        } else {
+          texto.innerHTML += mensagem.charAt(i);
+          i++;
+        }
       } else {
         clearInterval(intervalo);
         botaoSair.style.display = "inline-block";
       }
-    }, 50);
+    }, 75);
   });
 
   botaoSair.addEventListener("click", function () {
     window.close();
   });
 </script>
-
+	
 <script>
   document.querySelectorAll('a[href]').forEach(link => {
     // Apenas aplica em links que vão para outra página (mesmo domínio)

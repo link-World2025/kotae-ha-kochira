@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bulgaria quiz 1</title>
+  <title>Lithuania quiz 1</title>
   <style>
     body {
       margin: 0;
@@ -14,16 +14,16 @@
       animation: waveBackground 8s ease-in-out infinite;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-	  overflow-y: auto;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-	
-	body.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+
+    body.fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
 
     @keyframes waveBackground {
       0% { background-position: 0% 50%; }
@@ -62,49 +62,49 @@
     }
 
     .botao-3d-container {
-  position: relative;
-  display: inline-block;
-  margin-top: 20px;
-}
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
 
-#meuBotao {
-  position: relative;
-  z-index: 1;
-  background-color:  #0a1f3c;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 1.1s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-}
+    #meuBotao {
+      position: relative;
+      z-index: 1;
+      background-color: #0a1f3c;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 1.1s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
 
-#meuBotao:hover {
-  transform: scale(1.05);
-}
+    #meuBotao:hover {
+      transform: scale(1.05);
+    }
 
-.botao-3d-container::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  z-index: 0;
-  background: linear-gradient(45deg, #ff0000, #ff9900, #33cc33, #0066ff, #9900cc, #ff0000);
-  background-size: 400%;
-  border-radius: 16px;
-  filter: blur(6px);
-  animation: brilhoGirando 8s linear infinite;
-}
+    .botao-3d-container::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      z-index: 0;
+      background: linear-gradient(45deg, #ff0000, #ff9900, #33cc33, #0066ff, #9900cc, #ff0000);
+      background-size: 400%;
+      border-radius: 16px;
+      filter: blur(6px);
+      animation: brilhoGirando 8s linear infinite;
+    }
 
-@keyframes brilhoGirando {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 400% 50%; }
-}
+    @keyframes brilhoGirando {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
 
     #meuTexto {
       margin-top: 20px;
@@ -129,6 +129,32 @@
 
     #botaoSair:hover {
       background-color: #333;
+    }
+
+    .opcao {
+      background-color: #1b3d5f;
+      color: white;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      transition: background-color 0.3s;
+    }
+
+    .opcao:hover {
+      background-color: #345a8a;
+    }
+
+    .correta {
+      background-color: green !important;
+    }
+
+    .errada {
+      background-color: red !important;
     }
 
     @media (max-width: 600px) {
@@ -158,26 +184,54 @@
 <div class="container">
   <h2 class="texto-acima-botao">ブルガリア Quiz 1</h2>
   <p class="texto-acima-botao">数多くあるトラクターの中で、ワールドブリッジがブルガリアへ最も輸出したシリーズはどれでしょうか？</p>
-  <p class="texto-acima-botao">下記の中から一つお選びください。</p>
-  <p class="texto-acima-botao">①KUBOTA GLシリーズ</p>
-  <p class="texto-acima-botao">②YANMAR Fシリーズ</p>
-  <p class="texto-acima-botao">③MITSUBISHI MTシリーズ</p>
-  <p class="texto-acima-botao">④KUBOTA B シリーズ</p>
-  <p class="texto-acima-botao">⑤ISEKI TU シリーズ</p>
+  <p class="texto-acima-botao">以下の中から一つお選びください。</p>
+
+  <button class="opcao" data-correto="false">①KUBOTA GLシリーズ</button>
+  <button class="opcao" data-correto="true">②YANMAR Fシリーズ</button>
+  <button class="opcao" data-correto="false">③MITSUBISHI MTシリーズ</button>
+  <button class="opcao" data-correto="false">④KUBOTA B シリーズ</button>
+  <button class="opcao" data-correto="false">⑤ISEKI TU シリーズ</button>
 
   <div class="botao-3d-container">
-  <button id="meuBotao">答えはこちら</button>
-</div>
+    <button id="meuBotao">答えはこちら</button>
+  </div>
   <p id="meuTexto"></p>
   <button id="botaoSair">戻る</button>
 </div>
 
 <script>
+  let opcaoSelecionada = null;
+
+  document.querySelectorAll('.opcao').forEach(botao => {
+    botao.addEventListener('click', () => {
+      document.querySelectorAll('.opcao').forEach(b => {
+        b.style.outline = 'none';
+        b.classList.remove('correta', 'errada');
+      });
+      opcaoSelecionada = botao;
+      botao.style.outline = '3px solid yellow';
+    });
+  });
+
   const botao = document.getElementById("meuBotao");
   const texto = document.getElementById("meuTexto");
   const botaoSair = document.getElementById("botaoSair");
 
   botao.addEventListener("click", function () {
+    if (!opcaoSelecionada) {
+      alert("先に選択してください！");
+      return;
+    }
+
+    const correta = opcaoSelecionada.getAttribute("data-correto") === "true";
+
+    if (correta) {
+      opcaoSelecionada.classList.add("correta");
+    } else {
+      opcaoSelecionada.classList.add("errada");
+      document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
+    }
+
     const mensagem = "答えはズバリ、②YANMAR Fシリーズです。<br>ちなみにブルガリアへ最も売り上げたメーカーは現時点ではKUBOTAになります。";
     let i = 0;
     texto.innerHTML = "";
@@ -202,23 +256,6 @@
 
   botaoSair.addEventListener("click", function () {
     window.close();
-  });
-</script>
-	
-<script>
-  document.querySelectorAll('a[href]').forEach(link => {
-    // Apenas aplica em links que vão para outra página (mesmo domínio)
-    if (link.target !== '_blank' && link.href.indexOf(location.hostname) !== -1) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const destino = this.href;
-        document.body.classList.add('fade-out');
-
-        setTimeout(() => {
-          window.location.href = destino;
-        }, 500);
-      });
-    }
   });
 </script>
 

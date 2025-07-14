@@ -252,6 +252,21 @@ body.fade-in {
 </script>
 
 <script>
+  let cliqueContador = 0;
+  const logo = document.querySelector('.logo-brilhante');
+
+  if (logo) {
+    logo.addEventListener('click', () => {
+      cliqueContador++;
+      if (cliqueContador === 3) {
+        window.location.href = 'game.html'; // <- coloque aqui o nome da sua página secreta
+      }
+      setTimeout(() => cliqueContador = 0, 1000); // zera o contador após 1 segundo
+    });
+  }
+</script>
+	
+<script>
   // Quando a página carregar, remova a classe "fade-out" se ela estiver presente
   window.addEventListener('pageshow', () => {
     document.body.classList.remove('fade-out');

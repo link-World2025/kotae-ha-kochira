@@ -251,5 +251,12 @@ body.fade-in {
   
 </script>
 
+<script>
+  // Quando a página carregar, remova a classe "fade-out" se ela estiver presente
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('fade-out');
+  });
+</script>
+
 </body>
 </html>

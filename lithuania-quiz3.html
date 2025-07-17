@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lithuania quiz 2</title>
+  <title>Lithuania quiz 1</title>
   <style>
     body {
       margin: 0;
@@ -15,14 +15,6 @@
       font-family: Arial, sans-serif;
       overflow-x: hidden;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    body.fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
     }
 
     @keyframes waveBackground {
@@ -31,20 +23,21 @@
       100% { background-position: 0% 50%; }
     }
 
-    header {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    .logo-wrapper {
+      width: 100%;
+      padding-top: 20px; /* Ajuste aqui para mover a logo para baixo */
+      display: flex;
+      justify-content: center;
     }
 
-    header img {
-      height: 100px;
+    .logo-centralizada img {
+      height: 120px;
       width: auto;
       max-width: 90vw;
+      z-index: 10001;
     }
 
     .container {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -167,30 +160,32 @@
         font-size: 18px;
       }
 
-      header img {
-        height: 40px;
-      }
+      .logo-centralizada img {
+        height: 80px;
+      } 
     }
   </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html">
-    <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
-  </a>
-</header>
+  <div class="logo-wrapper">
+    <div class="logo-centralizada">
+      <a href="index.html">
+        <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
+      </a>
+    </div>
+  </div>
 
 <div class="container">
   <h2 class="texto-acima-botao">リトアニア Quiz 3</h2>
-  <p class="texto-acima-botao">2025年7月18日公開予定</p>
+  <p class="texto-acima-botao">ワールドが訪問したリトアニアのベリー畑では、ベリーの栽培だけでなく、ピューレ、ジュース、シロップといった加工品の製造・販売も行われています。さて、そこで販売しているベリーの価格は、1kgあたりいくらくらいでしょうか？</p>
   <p class="texto-acima-botao">以下の中から一つお選びください。</p>
 
-  <button class="opcao" data-correto="false">① ?</button>
-  <button class="opcao" data-correto="true">② ?</button>
-  <button class="opcao" data-correto="false">③ ?</button>
-  <button class="opcao" data-correto="false">④ ?</button>
-  <button class="opcao" data-correto="false">⑤ ?</button>
+  <button class="opcao" data-correto="false">① 10ユーロ</button>
+  <button class="opcao" data-correto="false">② 15ユーロ</button>
+  <button class="opcao" data-correto="false">③ 1ユーロ</button>
+  <button class="opcao" data-correto="false">④ 8ユーロ</button>
+  <button class="opcao" data-correto="true">⑤ 5ユーロ</button>
 
   <div class="botao-3d-container">
     <button id="meuBotao">答えはこちら</button>
@@ -232,7 +227,7 @@
       document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
     }
 
-    const mensagem = "正解は「② 第4位」でした！";
+    const mensagem = "正解は「⑤ 5ユーロ」でした！<br>時期や収穫状況により多少の変動はありますが、ベリーは1kgあたりおおよそ3〜5ユーロで販売されています。";
     let i = 0;
     texto.innerHTML = "";
     texto.style.opacity = 1;

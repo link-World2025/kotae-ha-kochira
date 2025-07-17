@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>リトアニアギャラリー</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #0a1f3c, #1b3d5f, #000000, #0a1f3c);
+      background-size: 800% 800%;
+      animation: waveBackground 8s ease-in-out infinite;
+      color: white;
+    }
+
+    @keyframes waveBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .logo-centralizada {
+      text-align: center;
+      margin-top: 20px;
+      z-index: 10001;
+    }
+
+    .logo-centralizada img {
+      height: 120px;
+      width: auto;
+      max-width: 90vw;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 26px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .galeria img {
+	  width: 100%;
+	  height: 180px; /* ou 200px se preferir mais alto */
+	  object-fit: cover;
+	  border-radius: 12px;
+	  cursor: pointer;
+	  transition: transform 0.3s ease, box-shadow 0.3s;
+	  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+	}
+
+    .galeria img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #fff;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      .logo-centralizada img {
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-centralizada">
+    <a href="index.html">
+      <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
+    </a>
+  </div>
+
+  <h1>リトアニア出張の写真ギャラリー</h1>
+
+  <div class="galeria">
+    <!-- Imagens inseridas via JavaScript -->
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="ampliada">
+  </div>
+
+  <script>
+    const links = [
+     "https://i.postimg.cc/4xBzBPPd/LINE-ALBUM-250715-1.jpg",
+	 "https://i.postimg.cc/251BTD3c/LINE-ALBUM-250715-10.jpg",
+	 "https://i.postimg.cc/fb1Srr9w/LINE-ALBUM-250715-11.jpg",
+	 "https://i.postimg.cc/Twm5MJVn/LINE-ALBUM-250715-12.jpg",
+	 "https://i.postimg.cc/hvBzSQs6/LINE-ALBUM-250715-13.jpg",
+	 "https://i.postimg.cc/8cmFskn5/LINE-ALBUM-250715-14.jpg",
+	 "https://i.postimg.cc/Vsq0K4L8/LINE-ALBUM-250715-15.jpg",
+	 "https://i.postimg.cc/ncnjg7CQ/LINE-ALBUM-250715-16.jpg",
+	 "https://i.postimg.cc/mgDc2s3L/LINE-ALBUM-250715-17.jpg",
+	 "https://i.postimg.cc/76ghQY4V/LINE-ALBUM-250715-18.jpg",
+	 "https://i.postimg.cc/nrpr8bct/LINE-ALBUM-250715-19.jpg",
+	 "https://i.postimg.cc/qvkssS8S/LINE-ALBUM-250715-2.jpg",
+	 "https://i.postimg.cc/QCmth4HK/LINE-ALBUM-250715-20.jpg",
+	 "https://i.postimg.cc/ryNz1mQy/LINE-ALBUM-250715-21.jpg",
+	 "https://i.postimg.cc/tCRJ2jM3/LINE-ALBUM-250715-22.jpg",
+	 "https://i.postimg.cc/X72JPzRT/LINE-ALBUM-250715-23.jpg",
+	 "https://i.postimg.cc/zG6fzRX7/LINE-ALBUM-250715-24.jpg",
+	 "https://i.postimg.cc/Nj5MvxYL/LINE-ALBUM-250715-25.jpg",
+	 "https://i.postimg.cc/6QZpy58X/LINE-ALBUM-250715-26.jpg",
+	 "https://i.postimg.cc/d35qzhx8/LINE-ALBUM-250715-27.jpg",
+	 "https://i.postimg.cc/7YLPSN5X/LINE-ALBUM-250715-28.jpg",
+	 "https://i.postimg.cc/zD7XLQGV/LINE-ALBUM-250715-29.jpg",
+	 "https://i.postimg.cc/CLCCfSfb/LINE-ALBUM-250715-3.jpg",
+	 "https://i.postimg.cc/KvsGfgLb/LINE-ALBUM-250715-30.jpg",
+	 "https://i.postimg.cc/pLw2bbq1/LINE-ALBUM-250715-31.jpg",
+	 "https://i.postimg.cc/d0GJJHfQ/LINE-ALBUM-250715-32.jpg",
+	 "https://i.postimg.cc/XJ34qKMf/LINE-ALBUM-250715-33.jpg",
+	 "https://i.postimg.cc/pTZxF9xg/LINE-ALBUM-250715-34.jpg",
+	 "https://i.postimg.cc/8kZNkrZv/LINE-ALBUM-250715-36.jpg",
+	 "https://i.postimg.cc/65SKnxJ5/LINE-ALBUM-250715-37.jpg",
+	 "https://i.postimg.cc/Hkygtvd0/LINE-ALBUM-250715-38.jpg",
+	 "https://i.postimg.cc/c46Zv4zb/LINE-ALBUM-250715-39.jpg",
+	 "https://i.postimg.cc/zXYSBV3J/LINE-ALBUM-250715-4.jpg",
+	 "https://i.postimg.cc/Dz3KpQw9/LINE-ALBUM-250715-40.jpg",
+	 "https://i.postimg.cc/XJQSvTkW/LINE-ALBUM-250715-41.jpg",
+	 "https://i.postimg.cc/MZ3JJJGb/LINE-ALBUM-250715-42.jpg",
+	 "https://i.postimg.cc/2yKsQhtX/LINE-ALBUM-250715-43.jpg",
+	 "https://i.postimg.cc/prrN5qsF/LINE-ALBUM-250715-44.jpg",
+	 "https://i.postimg.cc/x8JxS7st/LINE-ALBUM-250715-45.jpg",
+	 "https://i.postimg.cc/HWrdxkRP/LINE-ALBUM-250715-46.jpg",
+	 "https://i.postimg.cc/rFWT1Y81/LINE-ALBUM-250715-47.jpg",
+	 "https://i.postimg.cc/GmCCqJ2Z/LINE-ALBUM-250715-48.jpg",
+	 "https://i.postimg.cc/FHVQqdk1/LINE-ALBUM-250715-49.jpg",
+	 "https://i.postimg.cc/CK2bVKWp/LINE-ALBUM-250715-5.jpg",
+	 "https://i.postimg.cc/Ls4MM9jD/LINE-ALBUM-250715-50.jpg",
+	 "https://i.postimg.cc/R0PxSkRB/LINE-ALBUM-250715-51.jpg",
+	 "https://i.postimg.cc/QtHGHf4W/LINE-ALBUM-250715-52.jpg",
+	 "https://i.postimg.cc/rm36W53Z/LINE-ALBUM-250715-53.jpg",
+	 "https://i.postimg.cc/Y0W5xhwr/LINE-ALBUM-250715-54.jpg",
+	 "https://i.postimg.cc/XNB6WDBR/LINE-ALBUM-250715-55.jpg",
+	 "https://i.postimg.cc/zG5snz2N/LINE-ALBUM-250715-56.jpg",
+	 "https://i.postimg.cc/3xBP1szv/LINE-ALBUM-250715-57.jpg",
+	 "https://i.postimg.cc/0NyhBtqH/LINE-ALBUM-250715-58.jpg",
+	 "https://i.postimg.cc/3wfz5g8r/LINE-ALBUM-250715-59.jpg",
+	 "https://i.postimg.cc/NMrmGcc9/LINE-ALBUM-250715-6.jpg",
+	 "https://i.postimg.cc/V6SpYdvq/LINE-ALBUM-250715-60.jpg",
+	 "https://i.postimg.cc/Y0YPWZ1j/LINE-ALBUM-250715-61.jpg",
+	 "https://i.postimg.cc/XJThX4BT/LINE-ALBUM-250715-62.jpg",
+	 "https://i.postimg.cc/HWyRRcfH/LINE-ALBUM-250715-63.jpg",
+	 "https://i.postimg.cc/RVxyBCBt/LINE-ALBUM-250715-64.jpg",
+	 "https://i.postimg.cc/GhPNh0L5/LINE-ALBUM-250715-65.jpg",
+	 "https://i.postimg.cc/VkDVnjb9/LINE-ALBUM-250715-66.jpg",
+	 "https://i.postimg.cc/7ZxR5BbY/LINE-ALBUM-250715-67.jpg",
+	 "https://i.postimg.cc/vmTSzcWJ/LINE-ALBUM-250715-68.jpg",
+	 "https://i.postimg.cc/DzNpYn68/LINE-ALBUM-250715-69.jpg",
+	 "https://i.postimg.cc/x8DHc4fs/LINE-ALBUM-250715-7.jpg",
+	 "https://i.postimg.cc/zBRts62p/LINE-ALBUM-250715-70.jpg",
+	 "https://i.postimg.cc/J0V6Mx98/LINE-ALBUM-250715-71.jpg",
+	 "https://i.postimg.cc/vZq0cbp3/LINE-ALBUM-250715-72.jpg",
+	 "https://i.postimg.cc/NjfNs5PK/LINE-ALBUM-250715-73.jpg",
+	 "https://i.postimg.cc/Gp4qD6Rr/LINE-ALBUM-250715-74.jpg",
+	 "https://i.postimg.cc/LsGv3v4P/LINE-ALBUM-250715-75.jpg",
+	 "https://i.postimg.cc/vB9hq9DN/LINE-ALBUM-250715-76.jpg",
+	 "https://i.postimg.cc/MHSDhTQK/LINE-ALBUM-250715-77.jpg",
+	 "https://i.postimg.cc/L53TRptk/LINE-ALBUM-250715-78.jpg",
+	 "https://i.postimg.cc/jqHvyzpW/LINE-ALBUM-250715-79.jpg",
+	 "https://i.postimg.cc/RCKKj4d2/LINE-ALBUM-250715-8.jpg",
+	 "https://i.postimg.cc/Dy766Shx/LINE-ALBUM-250715-80.jpg",
+	 "https://i.postimg.cc/9F1pncFC/LINE-ALBUM-250715-81.jpg",
+	 "https://i.postimg.cc/9QnBc17k/LINE-ALBUM-250715-82.jpg",
+	 "https://i.postimg.cc/NjM4hZ5T/LINE-ALBUM-250715-83.jpg",
+	 "https://i.postimg.cc/cJtBCY7L/LINE-ALBUM-250715-84.jpg",
+	 "https://i.postimg.cc/mDxNHDVN/LINE-ALBUM-250715-85.jpg",
+	 "https://i.postimg.cc/PJym9MH2/LINE-ALBUM-250715-86.jpg",
+	 "https://i.postimg.cc/wMgXwGC1/LINE-ALBUM-250715-87.jpg",
+	 "https://i.postimg.cc/PfQzCdDY/LINE-ALBUM-250715-88.jpg",
+	 "https://i.postimg.cc/yY6h92h5/LINE-ALBUM-250715-89.jpg",
+	 "https://i.postimg.cc/pLGFDTV5/LINE-ALBUM-250715-9.jpg",
+	 "https://i.postimg.cc/SNZ6GVDK/LINE-ALBUM-250715-90.jpg",
+	 "https://i.postimg.cc/K8RnpLHD/LINE-ALBUM-250715-91.jpg",
+	 "https://i.postimg.cc/wjZDCMK8/LINE-ALBUM-250715-92.jpg",
+	 
+	  ];
+
+    const galeria = document.querySelector('.galeria');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    links.forEach(link => {
+      const img = document.createElement('img');
+      img.src = link;
+      img.alt = "imagem";
+      img.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = link;
+      });
+      galeria.appendChild(img);
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightboxImg) {
+        lightbox.classList.remove('active');
+        lightboxImg.src = "";
+      }
+    });
+  </script>
+
+</body>
+</html>

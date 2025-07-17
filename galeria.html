@@ -63,9 +63,10 @@
       box-shadow: 0 0 15px #fff;
     }
 
-	   .lightbox {
+		.lightbox {
 	  position: fixed;
-	  top: 0; left: 0;
+	  top: 0;
+	  left: 0;
 	  width: 100vw;
 	  height: 100vh;
 	  background-color: rgba(0, 0, 0, 0.9);
@@ -73,9 +74,17 @@
 	  justify-content: center;
 	  align-items: center;
 	  z-index: 10000;
+	  overflow: auto;
 	  padding: 20px;
-	  overflow-y: auto; /* permite scroll vertical em telas pequenas */
-	  text-align: center; /* centraliza em telas pequenas */
+	  box-sizing: border-box;
+	}
+
+	.lightbox-content {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  max-width: 100%;
+	  max-height: 100%;
 	}
 
 	.lightbox img {
@@ -83,7 +92,8 @@
 	  max-height: 90vh;
 	  width: auto;
 	  height: auto;
-	  border-radius: 12px;
+	  border-radius: 10px;
+	  display: block;
 	  margin: auto;
 	}
 
@@ -121,9 +131,11 @@
 
   <div class="galeria" id="galeria"></div>
 
-  <div class="lightbox" id="lightbox">
-    <img src="" alt="imagem ampliada">
+ <div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="Imagem ampliada">
   </div>
+</div>
 
   <script>
     const links = [

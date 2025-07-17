@@ -15,14 +15,6 @@
       font-family: Arial, sans-serif;
       overflow-x: hidden;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    body.fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
     }
 
     @keyframes waveBackground {
@@ -31,20 +23,21 @@
       100% { background-position: 0% 50%; }
     }
 
-    header {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    .logo-wrapper {
+      width: 100%;
+      padding-top: 20px; /* Ajuste aqui para mover a logo para baixo */
+      display: flex;
+      justify-content: center;
     }
 
-    header img {
-      height: 100px;
+    .logo-centralizada img {
+      height: 120px;
       width: auto;
       max-width: 90vw;
+      z-index: 10001;
     }
 
     .container {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -167,97 +160,99 @@
         font-size: 18px;
       }
 
-      header img {
-        height: 40px;
-      }
+      .logo-centralizada img {
+        height: 80px;
+      } 
     }
   </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html">
-    <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
-  </a>
-</header>
-
-<div class="container">
-  <h2 class="texto-acima-botao">リトアニア Quiz 1</h2>
-  <p class="texto-acima-botao">リトアニアの人口は288万人です。そのうち何％が農業に従事しているのでしょうか？</p>
-  <p class="texto-acima-botao">以下の5つの中からお選びください。</p>
-
-  <button class="opcao" data-correto="false">①約21%</button>
-  <button class="opcao" data-correto="false">②約65%</button>
-  <button class="opcao" data-correto="false">③約11%</button>
-  <button class="opcao" data-correto="true">④約7%</button>
-  <button class="opcao" data-correto="false">⑤約43%</button>
-
-  <div class="botao-3d-container">
-    <button id="meuBotao">答えはこちら</button>
+  <div class="logo-wrapper">
+    <div class="logo-centralizada">
+      <a href="index.html">
+        <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
+      </a>
+    </div>
   </div>
-  <p id="meuTexto"></p>
-  <button id="botaoSair">戻る</button>
-</div>
 
-<script>
-  let opcaoSelecionada = null;
+  <div class="container">
+    <h2 class="texto-acima-botao">リトアニア Quiz 1</h2>
+    <p class="texto-acima-botao">リトアニアの人口は288万人です。そのうち何％が農業に従事しているのでしょうか？</p>
+    <p class="texto-acima-botao">以下の5つの中からお選びください。</p>
 
-  document.querySelectorAll('.opcao').forEach(botao => {
-    botao.addEventListener('click', () => {
-      document.querySelectorAll('.opcao').forEach(b => {
-        b.style.outline = 'none';
-        b.classList.remove('correta', 'errada');
+    <button class="opcao" data-correto="false">①約21%</button>
+    <button class="opcao" data-correto="false">②約65%</button>
+    <button class="opcao" data-correto="false">③約11%</button>
+    <button class="opcao" data-correto="true">④約7%</button>
+    <button class="opcao" data-correto="false">⑤約43%</button>
+
+    <div class="botao-3d-container">
+      <button id="meuBotao">答えはこちら</button>
+    </div>
+    <p id="meuTexto"></p>
+    <button id="botaoSair">戻る</button>
+  </div>
+
+  <script>
+    let opcaoSelecionada = null;
+
+    document.querySelectorAll('.opcao').forEach(botao => {
+      botao.addEventListener('click', () => {
+        document.querySelectorAll('.opcao').forEach(b => {
+          b.style.outline = 'none';
+          b.classList.remove('correta', 'errada');
+        });
+        opcaoSelecionada = botao;
+        botao.style.outline = '3px solid yellow';
       });
-      opcaoSelecionada = botao;
-      botao.style.outline = '3px solid yellow';
     });
-  });
 
-  const botao = document.getElementById("meuBotao");
-  const texto = document.getElementById("meuTexto");
-  const botaoSair = document.getElementById("botaoSair");
+    const botao = document.getElementById("meuBotao");
+    const texto = document.getElementById("meuTexto");
+    const botaoSair = document.getElementById("botaoSair");
 
-  botao.addEventListener("click", function () {
-    if (!opcaoSelecionada) {
-      alert("先に選択してください！");
-      return;
-    }
-
-    const correta = opcaoSelecionada.getAttribute("data-correto") === "true";
-
-    if (correta) {
-      opcaoSelecionada.classList.add("correta");
-    } else {
-      opcaoSelecionada.classList.add("errada");
-      document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
-    }
-
-    const mensagem = "答えはズバリ、人口の④約7%が農業に従事しています。<br>人口が約288万人ですので、たった20万人程で<br>農業用地の32.650 km²を支えています。";
-    let i = 0;
-    texto.innerHTML = "";
-    texto.style.opacity = 1;
-    botao.disabled = true;
-
-    const intervalo = setInterval(() => {
-      if (i < mensagem.length) {
-        if (mensagem.substr(i, 4) === "<br>") {
-          texto.innerHTML += "<br>";
-          i += 4;
-        } else {
-          texto.innerHTML += mensagem.charAt(i);
-          i++;
-        }
-      } else {
-        clearInterval(intervalo);
-        botaoSair.style.display = "inline-block";
+    botao.addEventListener("click", function () {
+      if (!opcaoSelecionada) {
+        alert("先に選択してください！");
+        return;
       }
-    }, 75);
-  });
 
-  botaoSair.addEventListener("click", function () {
-    window.close();
-  });
-</script>
+      const correta = opcaoSelecionada.getAttribute("data-correto") === "true";
+
+      if (correta) {
+        opcaoSelecionada.classList.add("correta");
+      } else {
+        opcaoSelecionada.classList.add("errada");
+        document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
+      }
+
+      const mensagem = "答えはズバリ、人口の④約7%が農業に従事しています。<br>人口が約288万人ですので、たった20万人程で<br>農業用地の32.650 km²を支えています。";
+      let i = 0;
+      texto.innerHTML = "";
+      texto.style.opacity = 1;
+      botao.disabled = true;
+
+      const intervalo = setInterval(() => {
+        if (i < mensagem.length) {
+          if (mensagem.substr(i, 4) === "<br>") {
+            texto.innerHTML += "<br>";
+            i += 4;
+          } else {
+            texto.innerHTML += mensagem.charAt(i);
+            i++;
+          }
+        } else {
+          clearInterval(intervalo);
+          botaoSair.style.display = "inline-block";
+        }
+      }, 75);
+    });
+
+    botaoSair.addEventListener("click", function () {
+      window.close();
+    });
+  </script>
 
 </body>
 </html>

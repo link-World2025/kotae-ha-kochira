@@ -63,38 +63,29 @@
       box-shadow: 0 0 15px #fff;
     }
 
-		.lightbox {
+	.lightbox {
 	  position: fixed;
 	  top: 0;
 	  left: 0;
 	  width: 100vw;
 	  height: 100vh;
-	  background-color: rgba(0, 0, 0, 0.9);
-	  display: none;
-	  justify-content: center;
-	  align-items: center;
-	  z-index: 10000;
-	  overflow: auto;
-	  padding: 20px;
-	  box-sizing: border-box;
-	}
-
-	.lightbox-content {
+	  background-color: rgba(0, 0, 0, 0.95);
 	  display: flex;
 	  justify-content: center;
 	  align-items: center;
-	  max-width: 100%;
-	  max-height: 100%;
+	  z-index: 9999;
+	  padding: 20px;
+	  box-sizing: border-box;
+	  overflow: auto;
 	}
 
 	.lightbox img {
 	  max-width: 100%;
 	  max-height: 90vh;
-	  width: auto;
-	  height: auto;
-	  border-radius: 10px;
+	  object-fit: contain;
 	  display: block;
 	  margin: auto;
+	  border-radius: 10px;
 	}
 
     .lightbox.active {
@@ -132,11 +123,8 @@
   <div class="galeria" id="galeria"></div>
 
  <div class="lightbox" id="lightbox">
-  <div class="lightbox-content">
-    <img id="lightbox-img" src="" alt="Imagem ampliada">
-  </div>
+  <img id="lightbox-img" src="" alt="Imagem ampliada">
 </div>
-
   <script>
     const links = [
      "https://i.postimg.cc/4xBzBPPd/LINE-ALBUM-250715-1.jpg",

@@ -63,17 +63,18 @@
       box-shadow: 0 0 15px #fff;
     }
 
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      padding: 20px;
-    }
+	  .lightbox {
+	  display: none; /* ← MUITO IMPORTANTE! */
+	  position: fixed;
+	  z-index: 9999;
+	  left: 0;
+	  top: 0;
+	  width: 100vw;
+	  height: 100vh;
+	  background-color: rgba(0, 0, 0, 0.9);
+	  justify-content: center;
+	  align-items: center;
+	}
 
 	.lightbox img {
 	  max-width: 90vw;

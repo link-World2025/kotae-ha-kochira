@@ -16,9 +16,8 @@
     }
 
     @keyframes waveBackground {
-      0% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .logo-centralizada {
@@ -48,27 +47,26 @@
       margin: auto;
     }
 
-    .galeria img {
-	  width: 100%;
-	  height: 180px; /* ou 200px se preferir mais alto */
-	  object-fit: cover;
-	  border-radius: 12px;
-	  cursor: pointer;
-	  transition: transform 0.3s ease, box-shadow 0.3s;
-	  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-	}
+    .galeria .foto {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
 
-    .galeria img:hover {
+    .galeria .foto:hover {
       transform: scale(1.05);
       box-shadow: 0 0 15px #fff;
     }
 
     .lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background-color: rgba(0, 0, 0, 0.9);
       display: none;
       align-items: center;
@@ -88,13 +86,8 @@
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 22px;
-      }
-
-      .logo-centralizada img {
-        height: 80px;
-      }
+      h1 { font-size: 22px; }
+      .logo-centralizada img { height: 80px; }
     }
   </style>
 </head>
@@ -108,12 +101,10 @@
 
   <h1>リトアニア出張の写真ギャラリー</h1>
 
-  <div class="galeria">
-    <!-- Imagens inseridas via JavaScript -->
-  </div>
+  <div class="galeria" id="galeria"></div>
 
   <div class="lightbox" id="lightbox">
-    <img src="" alt="ampliada">
+    <img src="" alt="imagem ampliada">
   </div>
 
   <script>
@@ -209,31 +200,48 @@
 	 "https://i.postimg.cc/SNZ6GVDK/LINE-ALBUM-250715-90.jpg",
 	 "https://i.postimg.cc/K8RnpLHD/LINE-ALBUM-250715-91.jpg",
 	 "https://i.postimg.cc/wjZDCMK8/LINE-ALBUM-250715-92.jpg",
-	 
-	  ];
+      // ...adicione o restante aqui
+    ];
 
-    const galeria = document.querySelector('.galeria');
+    const galeria = document.getElementById('galeria');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
 
     links.forEach(link => {
-      const img = document.createElement('img');
-      img.src = link;
-      img.alt = "imagem";
-      img.addEventListener('click', () => {
+      const div = document.createElement('div');
+      div.className = 'foto';
+      div.style.backgroundImage = `url(${link})`;
+      div.addEventListener('click', () => {
         lightbox.classList.add('active');
         lightboxImg.src = link;
       });
-      galeria.appendChild(img);
+      galeria.appendChild(div);
     });
 
-    lightbox.addEventListener('click', (e) => {
+    lightbox.addEventListener('click', e => {
       if (e.target === lightbox || e.target === lightboxImg) {
         lightbox.classList.remove('active');
-        lightboxImg.src = "";
+        lightboxImg.src = '';
       }
     });
   </script>
+  
+  <script>
+  // Desativa o menu do botão direito do mouse
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Desativa arrastar imagens
+  document.addEventListener('dragstart', function (e) {
+    e.preventDefault();
+  });
+
+  // Previne seleção de texto
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+</script>
 
 </body>
 </html>

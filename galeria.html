@@ -6,21 +6,24 @@
   <title>リトアニアギャラリー</title>
   <style>
 
-   html {
-      background: inherit;
-      height: 100%;
-    }
-	  
-    body {
-　　  background: inherit;
-      padding-top: constant(safe-area-inset-top);
-      padding-top: env(safe-area-inset-top);   
-      font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #0a1f3c, #1b3d5f, #000000, #0a1f3c);
-      background-size: 800% 800%;
-      animation: waveBackground 8s ease-in-out infinite;
-      color: white;
-    }
+	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #0a1f3c, #1b3d5f, #000000, #0a1f3c);
+  background-size: 800% 800%;
+  animation: waveBackground 8s ease-in-out infinite;
+  color: white;
+}
+
 
     @keyframes waveBackground {
       0%, 100% { background-position: 0% 50%; }

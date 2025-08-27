@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ポーランドギャラリー</title>
+  <style>
+
+	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #0a1f3c, #1b3d5f, #000000, #0a1f3c);
+  background-size: 800% 800%;
+  animation: waveBackground 8s ease-in-out infinite;
+  color: white;
+}
+
+
+    @keyframes waveBackground {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .logo-centralizada {
+      text-align: center;
+      margin-top: 20px;
+      z-index: 10001;
+    }
+
+    .logo-centralizada img {
+      height: 120px;
+      width: auto;
+      max-width: 90vw;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 26px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .galeria .foto {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .galeria .foto:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #fff;
+    }
+
+	  .lightbox {
+	  display: none; /* ← MUITO IMPORTANTE! */
+	  position: fixed;
+	  z-index: 9999;
+	  left: 0;
+	  top: 0;
+	  width: 100vw;
+	  height: 100vh;
+	  background-color: rgba(0, 0, 0, 0.9);
+	  justify-content: center;
+	  align-items: center;
+	}
+
+	.lightbox img {
+	  max-width: 90vw;
+	  max-height: 90vh;
+	  display: block;
+	  margin: auto;
+	  box-shadow: 0 0 10px black;
+	}
+
+    .lightbox.active {
+      display: flex;
+      margin: auto;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      .logo-centralizada img { height: 80px; }
+    }
+	
+	@media (max-width: 600px) {
+  .lightbox {
+    align-items: flex-start;
+    padding-top: 40px; /* dá espaço no topo */
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="logo-centralizada">
+    <a href="index.html">
+      <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
+    </a>
+  </div>
+
+  <h1>ポーランド出張の写真ギャラリー</h1>
+
+  <div class="galeria" id="galeria"></div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="imagem ampliada">
+  </div>
+
+  <script>
+    const links = [
+	"https://i.postimg.cc/wxfWWb1x/LINE-ALBUM-250722-1.jpg",
+	"https://i.postimg.cc/KzYPBxrP/LINE-ALBUM-250722-10.jpg",
+	"https://i.postimg.cc/Kc1cjjgZ/LINE-ALBUM-250722-100.jpg",
+	"https://i.postimg.cc/RC2SHmcw/LINE-ALBUM-250722-101.jpg",
+	"https://i.postimg.cc/7ZkqKNt6/LINE-ALBUM-250722-102.jpg",
+	"https://i.postimg.cc/KvLZ7WNw/LINE-ALBUM-250722-103.jpg",
+	"https://i.postimg.cc/7LPwkZkr/LINE-ALBUM-250722-104.jpg",
+	"https://i.postimg.cc/MpmqNjgY/LINE-ALBUM-250722-105.jpg",
+	"https://i.postimg.cc/vmPMHwYg/LINE-ALBUM-250722-106.jpg",
+	"https://i.postimg.cc/FR7vYCzP/LINE-ALBUM-250722-107.jpg",
+	"https://i.postimg.cc/C1XgkCfw/LINE-ALBUM-250722-108.jpg",
+	"https://i.postimg.cc/kMR99HkG/LINE-ALBUM-250722-109.jpg",
+	"https://i.postimg.cc/PxFmM92B/LINE-ALBUM-250722-11.jpg",
+	"https://i.postimg.cc/FzSQZfj3/LINE-ALBUM-250722-110.jpg",
+	"https://i.postimg.cc/3JMhwBTB/LINE-ALBUM-250722-111.jpg",
+	"https://i.postimg.cc/VLj80Csc/LINE-ALBUM-250722-112.jpg",
+	"https://i.postimg.cc/rppXHZ18/LINE-ALBUM-250722-113.jpg",
+	"https://i.postimg.cc/g2sbNb6S/LINE-ALBUM-250722-114.jpg",
+	"https://i.postimg.cc/4d7CfK2q/LINE-ALBUM-250722-115.jpg",
+	"https://i.postimg.cc/mD0vtb0D/LINE-ALBUM-250722-116.jpg",
+	"https://i.postimg.cc/WpZRxkkJ/LINE-ALBUM-250722-117.jpg",
+	"https://i.postimg.cc/gj8fhCWK/LINE-ALBUM-250722-118.jpg",
+	"https://i.postimg.cc/15ZxS3G7/LINE-ALBUM-250722-119.jpg",
+	"https://i.postimg.cc/rs05ZjHz/LINE-ALBUM-250722-12.jpg",
+	"https://i.postimg.cc/W12QDYfM/LINE-ALBUM-250722-120.jpg",
+	"https://i.postimg.cc/W1Xx0mQx/LINE-ALBUM-250722-121.jpg",
+	"https://i.postimg.cc/RV1kZxGS/LINE-ALBUM-250722-122.jpg",
+	"https://i.postimg.cc/YSPVsr23/LINE-ALBUM-250722-123.jpg",
+	"https://i.postimg.cc/DZbDV98K/LINE-ALBUM-250722-124.jpg",
+	"https://i.postimg.cc/tJQc9Bxn/LINE-ALBUM-250722-125.jpg",
+	"https://i.postimg.cc/FF3qTXMy/LINE-ALBUM-250722-126.jpg",
+	"https://i.postimg.cc/yYKG5rKw/LINE-ALBUM-250722-127.jpg",
+	"https://i.postimg.cc/bNR5jHNd/LINE-ALBUM-250722-128.jpg",
+	"https://i.postimg.cc/9QFnXRrb/LINE-ALBUM-250722-129.jpg",
+	"https://i.postimg.cc/05FYKg6S/LINE-ALBUM-250722-13.jpg",
+	"https://i.postimg.cc/QMv4qfSY/LINE-ALBUM-250722-130.jpg",
+	"https://i.postimg.cc/FRcPC0Br/LINE-ALBUM-250722-131.jpg",
+	"https://i.postimg.cc/jjD3Np6J/LINE-ALBUM-250722-132.jpg",
+	"https://i.postimg.cc/cCSFp6pQ/LINE-ALBUM-250722-133.jpg",
+	"https://i.postimg.cc/3NFtYYhz/LINE-ALBUM-250722-134.jpg",
+	"https://i.postimg.cc/J4KpFrPk/LINE-ALBUM-250722-135.jpg",
+	"https://i.postimg.cc/zGc0JdmD/LINE-ALBUM-250722-136.jpg",
+	"https://i.postimg.cc/sgXTdkN0/LINE-ALBUM-250722-137.jpg",
+	"https://i.postimg.cc/50cgz6NZ/LINE-ALBUM-250722-138.jpg",
+	"https://i.postimg.cc/SRkGZ39d/LINE-ALBUM-250722-139.jpg",
+	"https://i.postimg.cc/T3qgsptj/LINE-ALBUM-250722-14.jpg",
+	"https://i.postimg.cc/nzvkGpXM/LINE-ALBUM-250722-140.jpg",
+	"https://i.postimg.cc/QCmJvmk3/LINE-ALBUM-250722-141.jpg",
+	"https://i.postimg.cc/zDF7LDmc/LINE-ALBUM-250722-142.jpg",
+	"https://i.postimg.cc/N0X7QB7b/LINE-ALBUM-250722-143.jpg",
+	"https://i.postimg.cc/PrFmZPS2/LINE-ALBUM-250722-144.jpg",
+	"https://i.postimg.cc/wjyDkgPH/LINE-ALBUM-250722-145.jpg",
+	"https://i.postimg.cc/K86BqCST/LINE-ALBUM-250722-146.jpg",
+	"https://i.postimg.cc/3w2pP9Yc/LINE-ALBUM-250722-147.jpg",
+	"https://i.postimg.cc/d0cZmdrm/LINE-ALBUM-250722-148.jpg",
+	"https://i.postimg.cc/W1kJkSF1/LINE-ALBUM-250722-149.jpg",
+	"https://i.postimg.cc/YqF11Xgs/LINE-ALBUM-250722-15.jpg",
+	"https://i.postimg.cc/q7chmRGf/LINE-ALBUM-250722-150.jpg",
+	"https://i.postimg.cc/851FxSy7/LINE-ALBUM-250722-151.jpg",
+	"https://i.postimg.cc/Gtt4hjnr/LINE-ALBUM-250722-152.jpg",
+	"https://i.postimg.cc/DyWS95cP/LINE-ALBUM-250722-153.jpg",
+	"https://i.postimg.cc/VvhdSbzt/LINE-ALBUM-250722-154.jpg",
+	"https://i.postimg.cc/wx4t4nDB/LINE-ALBUM-250722-155.jpg",
+	"https://i.postimg.cc/tCLspPSQ/LINE-ALBUM-250722-156.jpg",
+	"https://i.postimg.cc/9MFMJBMT/LINE-ALBUM-250722-157.jpg",
+	"https://i.postimg.cc/NMJ0Vr9n/LINE-ALBUM-250722-158.jpg",
+	"https://i.postimg.cc/tgb7VbGB/LINE-ALBUM-250722-159.jpg",
+	"https://i.postimg.cc/nhtqTvGc/LINE-ALBUM-250722-16.jpg",
+	"https://i.postimg.cc/HLtnwNpd/LINE-ALBUM-250722-160.jpg",
+	"https://i.postimg.cc/brZvjN1w/LINE-ALBUM-250722-161.jpg",
+	"https://i.postimg.cc/L5G84KVB/LINE-ALBUM-250722-162.jpg",
+	"https://i.postimg.cc/7PR6n0yG/LINE-ALBUM-250722-163.jpg",
+	"https://i.postimg.cc/5NFt7yxP/LINE-ALBUM-250722-164.jpg",
+	"https://i.postimg.cc/jS0SGT2R/LINE-ALBUM-250722-165.jpg",
+	"https://i.postimg.cc/RZ7ZmYJK/LINE-ALBUM-250722-166.jpg",
+	"https://i.postimg.cc/vmGHZv5j/LINE-ALBUM-250722-167.jpg",
+	"https://i.postimg.cc/wBFxysVB/LINE-ALBUM-250722-168.jpg",
+	"https://i.postimg.cc/j55xzdg4/LINE-ALBUM-250722-169.jpg",
+	"https://i.postimg.cc/yN1cCsGM/LINE-ALBUM-250722-17.jpg",
+	"https://i.postimg.cc/T15T4NXy/LINE-ALBUM-250722-170.jpg",
+	"https://i.postimg.cc/qBNnrkJK/LINE-ALBUM-250722-171.jpg",
+	"https://i.postimg.cc/kDr73NnT/LINE-ALBUM-250722-172.jpg",
+	"https://i.postimg.cc/G36DhZt5/LINE-ALBUM-250722-173.jpg",
+	"https://i.postimg.cc/zXWgL0RX/LINE-ALBUM-250722-174.jpg",
+	"https://i.postimg.cc/DwTb1LqQ/LINE-ALBUM-250722-175.jpg",
+	"https://i.postimg.cc/ht1Qsvrk/LINE-ALBUM-250722-176.jpg",
+	"https://i.postimg.cc/R0C6DmpN/LINE-ALBUM-250722-177.jpg",
+	"https://i.postimg.cc/CKvBy29J/LINE-ALBUM-250722-178.jpg",
+	"https://i.postimg.cc/k4BV7cmC/LINE-ALBUM-250722-179.jpg",
+	"https://i.postimg.cc/xC7zmHdQ/LINE-ALBUM-250722-18.jpg",
+	"https://i.postimg.cc/yxRkZ8xr/LINE-ALBUM-250722-180.jpg",
+	"https://i.postimg.cc/FR8YzLrL/LINE-ALBUM-250722-181.jpg",
+	"https://i.postimg.cc/RCJ38XdQ/LINE-ALBUM-250722-182.jpg",
+	"https://i.postimg.cc/VLyScnHy/LINE-ALBUM-250722-183.jpg",
+	"https://i.postimg.cc/MpqvnxSd/LINE-ALBUM-250722-184.jpg",
+	"https://i.postimg.cc/WbMdpzQd/LINE-ALBUM-250722-185.jpg",
+	"https://i.postimg.cc/P5yNZcfh/LINE-ALBUM-250722-186.jpg",
+	"https://i.postimg.cc/GpptjQ9D/LINE-ALBUM-250722-187.jpg",
+	"https://i.postimg.cc/VNH6ZCbV/LINE-ALBUM-250722-188.jpg",
+	"https://i.postimg.cc/4d73Dx6N/LINE-ALBUM-250722-189.jpg",
+	"https://i.postimg.cc/SRMzfsXM/LINE-ALBUM-250722-19.jpg",
+	"https://i.postimg.cc/SsBKkbdL/LINE-ALBUM-250722-190.jpg",
+	"https://i.postimg.cc/D01wzpp9/LINE-ALBUM-250722-191.jpg",
+	"https://i.postimg.cc/9X9M1zXL/LINE-ALBUM-250722-192.jpg",
+	"https://i.postimg.cc/Prkq7hPT/LINE-ALBUM-250722-193.jpg",
+	"https://i.postimg.cc/HkYkp2wN/LINE-ALBUM-250722-194.jpg",
+	"https://i.postimg.cc/8PBCQ36W/LINE-ALBUM-250722-195.jpg",
+	"https://i.postimg.cc/vZ0HDVXZ/LINE-ALBUM-250722-196.jpg",
+	"https://i.postimg.cc/DzmfGwYd/LINE-ALBUM-250722-197.jpg",
+	"https://i.postimg.cc/1zTmr1kx/LINE-ALBUM-250722-198.jpg",
+	"https://i.postimg.cc/tTxXrmbs/LINE-ALBUM-250722-199.jpg",
+	"https://i.postimg.cc/mryj7dxs/LINE-ALBUM-250722-2.jpg",
+	"https://i.postimg.cc/vDwxqs9S/LINE-ALBUM-250722-20.jpg",
+	"https://i.postimg.cc/kGP7LFMf/LINE-ALBUM-250722-200.jpg",
+	"https://i.postimg.cc/j26RTwLK/LINE-ALBUM-250722-201.jpg",
+	"https://i.postimg.cc/Pf1XYcKc/LINE-ALBUM-250722-202.jpg",
+	"https://i.postimg.cc/02x8ffBN/LINE-ALBUM-250722-203.jpg",
+	"https://i.postimg.cc/SNrmtMBf/LINE-ALBUM-250722-204.jpg",
+	"https://i.postimg.cc/YCCtcSkK/LINE-ALBUM-250722-205.jpg",
+	"https://i.postimg.cc/Gmgdb1hB/LINE-ALBUM-250722-206.jpg",
+	"https://i.postimg.cc/jjWK5kLM/LINE-ALBUM-250722-207.jpg",
+	"https://i.postimg.cc/XvTWyc54/LINE-ALBUM-250722-208.jpg",
+	"https://i.postimg.cc/1Rf2wNHj/LINE-ALBUM-250722-21.jpg",
+	"https://i.postimg.cc/3JGqb5zj/LINE-ALBUM-250722-22.jpg",
+	"https://i.postimg.cc/CMXtNLrL/LINE-ALBUM-250722-23.jpg",
+	"https://i.postimg.cc/qvd5PDdP/LINE-ALBUM-250722-24.jpg",
+	"https://i.postimg.cc/3xCcYj8d/LINE-ALBUM-250722-25.jpg",
+	"https://i.postimg.cc/ZR0781rd/LINE-ALBUM-250722-26.jpg",
+	"https://i.postimg.cc/N0dCrgrt/LINE-ALBUM-250722-27.jpg",
+	"https://i.postimg.cc/nz5d00kw/LINE-ALBUM-250722-28.jpg",
+	"https://i.postimg.cc/L51x7LQ4/LINE-ALBUM-250722-29.jpg",
+	"https://i.postimg.cc/7LkXCFW9/LINE-ALBUM-250722-3.jpg",
+	"https://i.postimg.cc/h4kymZhX/LINE-ALBUM-250722-30.jpg",
+	"https://i.postimg.cc/Wb09wmJX/LINE-ALBUM-250722-31.jpg",
+	"https://i.postimg.cc/2Sm0cqQm/LINE-ALBUM-250722-32.jpg",
+	"https://i.postimg.cc/jjSZTG3F/LINE-ALBUM-250722-33.jpg",
+	"https://i.postimg.cc/QMYSd0Rx/LINE-ALBUM-250722-34.jpg",
+	"https://i.postimg.cc/LXrTzh9c/LINE-ALBUM-250722-35.jpg",
+	"https://i.postimg.cc/bYtLq0Lp/LINE-ALBUM-250722-36.jpg",
+	"https://i.postimg.cc/wTY2MtbJ/LINE-ALBUM-250722-37.jpg",
+	"https://i.postimg.cc/L5LVvRhn/LINE-ALBUM-250722-38.jpg",
+	"https://i.postimg.cc/fT7K9w6P/LINE-ALBUM-250722-39.jpg",
+	"https://i.postimg.cc/RhDXNqkJ/LINE-ALBUM-250722-4.jpg",
+	"https://i.postimg.cc/YCbzdd2f/LINE-ALBUM-250722-40.jpg",
+	"https://i.postimg.cc/bwzR07Pw/LINE-ALBUM-250722-41.jpg",
+	"https://i.postimg.cc/g0jqQ3n9/LINE-ALBUM-250722-42.jpg",
+	"https://i.postimg.cc/Znt8WgjZ/LINE-ALBUM-250722-43.jpg",
+	"https://i.postimg.cc/GtFkGQSD/LINE-ALBUM-250722-44.jpg",
+	"https://i.postimg.cc/28YdmsV7/LINE-ALBUM-250722-45.jpg",
+	"https://i.postimg.cc/44VvDfN3/LINE-ALBUM-250722-46.jpg",
+	"https://i.postimg.cc/bwNQS10G/LINE-ALBUM-250722-47.jpg",
+	"https://i.postimg.cc/2ScnQ3T0/LINE-ALBUM-250722-48.jpg",
+	"https://i.postimg.cc/FKY3DmBN/LINE-ALBUM-250722-49.jpg",
+	"https://i.postimg.cc/0jF09FSp/LINE-ALBUM-250722-5.jpg",
+	"https://i.postimg.cc/mrKMnqvM/LINE-ALBUM-250722-50.jpg",
+	"https://i.postimg.cc/W3rrc8Vy/LINE-ALBUM-250722-51.jpg",
+	"https://i.postimg.cc/NFcXsXfj/LINE-ALBUM-250722-52.jpg",
+	"https://i.postimg.cc/KvmTCtH9/LINE-ALBUM-250722-53.jpg",
+	"https://i.postimg.cc/v8r9P03g/LINE-ALBUM-250722-54.jpg",
+	"https://i.postimg.cc/2SKBqM8J/LINE-ALBUM-250722-55.jpg",
+	"https://i.postimg.cc/sgXhgsy7/LINE-ALBUM-250722-56.jpg",
+	"https://i.postimg.cc/9fwwybDf/LINE-ALBUM-250722-57.jpg",
+	"https://i.postimg.cc/bJXDgnn9/LINE-ALBUM-250722-58.jpg",
+	"https://i.postimg.cc/5ybHdMnH/LINE-ALBUM-250722-59.jpg",
+	"https://i.postimg.cc/VL0FKsy4/LINE-ALBUM-250722-6.jpg",
+	"https://i.postimg.cc/NM1yz07q/LINE-ALBUM-250722-60.jpg",
+	"https://i.postimg.cc/0jnz9HBV/LINE-ALBUM-250722-61.jpg",
+	"https://i.postimg.cc/XNkGKpY9/LINE-ALBUM-250722-62.jpg",
+	"https://i.postimg.cc/Gh3BXd4V/LINE-ALBUM-250722-63.jpg",
+	"https://i.postimg.cc/jd8D9mN5/LINE-ALBUM-250722-64.jpg",
+	"https://i.postimg.cc/bwsZjgHR/LINE-ALBUM-250722-65.jpg",
+	"https://i.postimg.cc/4xqm4cWR/LINE-ALBUM-250722-66.jpg",
+	"https://i.postimg.cc/4dTyVgC8/LINE-ALBUM-250722-67.jpg",
+	"https://i.postimg.cc/s2W1M2LQ/LINE-ALBUM-250722-68.jpg",
+	"https://i.postimg.cc/RFQFTD4v/LINE-ALBUM-250722-69.jpg",
+	"https://i.postimg.cc/VkyWpymw/LINE-ALBUM-250722-7.jpg",
+	"https://i.postimg.cc/j2xj34SP/LINE-ALBUM-250722-70.jpg",
+	"https://i.postimg.cc/d35VbZhX/LINE-ALBUM-250722-71.jpg",
+	"https://i.postimg.cc/G3Kt8VXQ/LINE-ALBUM-250722-72.jpg",
+	"https://i.postimg.cc/nrSnR85f/LINE-ALBUM-250722-73.jpg",
+	"https://i.postimg.cc/RFRStJLF/LINE-ALBUM-250722-74.jpg",
+	"https://i.postimg.cc/c45JTYyt/LINE-ALBUM-250722-75.jpg",
+	"https://i.postimg.cc/VvkYWsKF/LINE-ALBUM-250722-76.jpg",
+	"https://i.postimg.cc/tRBRCPgv/LINE-ALBUM-250722-77.jpg",
+	"https://i.postimg.cc/fTkz3Ltz/LINE-ALBUM-250722-78.jpg",
+	"https://i.postimg.cc/dtXqGYr8/LINE-ALBUM-250722-79.jpg",
+	"https://i.postimg.cc/c1bm7gzr/LINE-ALBUM-250722-8.jpg",
+	"https://i.postimg.cc/fR9MKrf1/LINE-ALBUM-250722-80.jpg",
+	"https://i.postimg.cc/cJ70qtjm/LINE-ALBUM-250722-81.jpg",
+	"https://i.postimg.cc/N0vBPkNF/LINE-ALBUM-250722-82.jpg",
+	"https://i.postimg.cc/Y0PwN6Gp/LINE-ALBUM-250722-83.jpg",
+	"https://i.postimg.cc/nz0xrbn9/LINE-ALBUM-250722-84.jpg",
+	"https://i.postimg.cc/rFdTVP3z/LINE-ALBUM-250722-85.jpg",
+	"https://i.postimg.cc/HWvHCgSf/LINE-ALBUM-250722-86.jpg",
+	"https://i.postimg.cc/qvydnCkT/LINE-ALBUM-250722-87.jpg",
+	"https://i.postimg.cc/LsSFV6XZ/LINE-ALBUM-250722-88.jpg",
+	"https://i.postimg.cc/pTXNgGKW/LINE-ALBUM-250722-89.jpg",
+	"https://i.postimg.cc/25Gd1Vvj/LINE-ALBUM-250722-9.jpg",
+	"https://i.postimg.cc/FKx5C5dC/LINE-ALBUM-250722-90.jpg",
+	"https://i.postimg.cc/qRbf0sG8/LINE-ALBUM-250722-91.jpg",
+	"https://i.postimg.cc/QCH2MF6v/LINE-ALBUM-250722-92.jpg",
+	"https://i.postimg.cc/SQP0vGR4/LINE-ALBUM-250722-93.jpg",
+	"https://i.postimg.cc/xTbrDbNz/LINE-ALBUM-250722-94.jpg",
+	"https://i.postimg.cc/SKkHMTT6/LINE-ALBUM-250722-95.jpg",
+	"https://i.postimg.cc/9QGvz5pX/LINE-ALBUM-250722-96.jpg",
+	"https://i.postimg.cc/50krDxxg/LINE-ALBUM-250722-97.jpg",
+	"https://i.postimg.cc/Y0GPHJ0H/LINE-ALBUM-250722-98.jpg",
+	"https://i.postimg.cc/WzBHbXqJ/LINE-ALBUM-250722-99.jpg",
+      // ...adicione o restante aqui
+    ];
+
+    const galeria = document.getElementById('galeria');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    links.forEach(link => {
+      const div = document.createElement('div');
+      div.className = 'foto';
+      div.style.backgroundImage = `url(${link})`;
+      div.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = link;
+      });
+      galeria.appendChild(div);
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lightboxImg) {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      }
+    });
+  </script>
+  
+  <script>
+  // Desativa o menu do botão direito do mouse
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Desativa arrastar imagens
+  document.addEventListener('dragstart', function (e) {
+    e.preventDefault();
+  });
+
+  // Previne seleção de texto
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+</script>
+
+</body>
+</html>

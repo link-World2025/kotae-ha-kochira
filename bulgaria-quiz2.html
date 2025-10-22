@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bulgaria quiz 1</title>
+  <title>Bulgaria quiz 2</title>
   <style>
 	body {
 	  margin: 0;
@@ -176,16 +176,16 @@
   </div>
 
 <div class="container">
-  <h2 class="texto-acima-botao">ブルガリア Quiz 1</h2>
-  <p class="texto-acima-botao">ブルガリアの農産物の中で最も生産量が多いのはどれでしょうか？
+  <h2 class="texto-acima-botao">ブルガリア Quiz 2</h2>
+  <p class="texto-acima-botao">日本で昔から販売されていて、正式商品名に「ブルガリア」が付く物はどれでしょうか？
 </p>
   <p class="texto-acima-botao">以下の中から一つお選びください。</p>
 
-  <button class="opcao" data-correto="false">① トウモロコシ</button>
-  <button class="opcao" data-correto="false">② 大麦</button>
-  <button class="opcao" data-correto="false">③ 小麦</button>
-  <button class="opcao" data-correto="false">④ サクランボ</button>
-  <button class="opcao" data-correto="true">⑤ ベリー類</button>
+  <button class="opcao" data-correto="false">① 牛乳</button>
+  <button class="opcao" data-correto="true">② ヨーグルト</button>
+  <button class="opcao" data-correto="false">③ ビール</button>
+  <button class="opcao" data-correto="false">④ ワイン</button>
+  <button class="opcao" data-correto="false">⑤ チョコレート</button>
 
   <div class="botao-3d-container">
     <button id="meuBotao">答えはこちら</button>
@@ -227,7 +227,7 @@
       document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
     }
 
-    const mensagem = "正解は「⑤ ベリー類」でした！";
+    const mensagem = "正解は「② ヨーグルト」でした！<br>明治ブルガリアヨーグルトに「ブルガリア」という名前が使われているのは、<br>1970年の大阪万博でブルガリア館に展示されていた本場のヨーグルトを明治乳業の社員が試食し、<br>その味に感銘を受けたことがきっかけで開発が始まり、ブルガリア政府からも正式に国名使用の許可を得ました。";
     let i = 0;
     texto.innerHTML = "";
     texto.style.opacity = 1;

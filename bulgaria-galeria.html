@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ブルガリアギャラリー</title>
+  <style>
+
+	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #0a1f3c, #1b3d5f, #000000, #0a1f3c);
+  background-size: 800% 800%;
+  animation: waveBackground 8s ease-in-out infinite;
+  color: white;
+}
+
+
+    @keyframes waveBackground {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .logo-centralizada {
+      text-align: center;
+      margin-top: 20px;
+      z-index: 10001;
+    }
+
+    .logo-centralizada img {
+      height: 120px;
+      width: auto;
+      max-width: 90vw;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 26px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .galeria .foto {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .galeria .foto:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #fff;
+    }
+
+	  .lightbox {
+	  display: none; /* ← MUITO IMPORTANTE! */
+	  position: fixed;
+	  z-index: 9999;
+	  left: 0;
+	  top: 0;
+	  width: 100vw;
+	  height: 100vh;
+	  background-color: rgba(0, 0, 0, 0.9);
+	  justify-content: center;
+	  align-items: center;
+	}
+
+	.lightbox img {
+	  max-width: 90vw;
+	  max-height: 90vh;
+	  display: block;
+	  margin: auto;
+	  box-shadow: 0 0 10px black;
+	}
+
+    .lightbox.active {
+      display: flex;
+      margin: auto;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      .logo-centralizada img { height: 80px; }
+    }
+	
+	@media (max-width: 600px) {
+  .lightbox {
+    align-items: flex-start;
+    padding-top: 40px; /* dá espaço no topo */
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="logo-centralizada">
+    <a href="index.html">
+      <img src="https://i.postimg.cc/J0fQMJcR/logo-recortada.png" alt="Logo">
+    </a>
+  </div>
+
+  <h1>ブルガリア出張の写真ギャラリー</h1>
+
+  <div class="galeria" id="galeria"></div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="imagem ampliada">
+  </div>
+
+  <script>
+    const links = [
+	"https://i.postimg.cc/Vk7FGz86/LINE-ALBUM-250729-1.jpg",
+	"https://i.postimg.cc/LXyRhYKS/LINE-ALBUM-250729-10.jpg",
+	"https://i.postimg.cc/y8FHcr4v/LINE-ALBUM-250729-11.jpg",
+	"https://i.postimg.cc/Gpq6xWMJ/LINE-ALBUM-250729-12.jpg",
+	"https://i.postimg.cc/Dzpnw4KT/LINE-ALBUM-250729-13.jpg",
+	"https://i.postimg.cc/5yLVgPQ4/LINE-ALBUM-250729-14.jpg",
+	"https://i.postimg.cc/VNhP8yjs/LINE-ALBUM-250729-15.jpg",
+	"https://i.postimg.cc/0QJR5tfY/LINE-ALBUM-250729-16.jpg",
+	"https://i.postimg.cc/c4WyZB83/LINE-ALBUM-250729-17.jpg",
+	"https://i.postimg.cc/wjxCRx2T/LINE-ALBUM-250729-18.jpg",
+	"https://i.postimg.cc/mghdGPVM/LINE-ALBUM-250729-19.jpg",
+	"https://i.postimg.cc/DwfgP8RH/LINE-ALBUM-250729-2.jpg",
+	"https://i.postimg.cc/jdSczDp9/LINE-ALBUM-250729-20.jpg",
+	"https://i.postimg.cc/3rnCJKkZ/LINE-ALBUM-250729-21.jpg",
+	"https://i.postimg.cc/RhscPTkY/LINE-ALBUM-250729-22.jpg",
+	"https://i.postimg.cc/pT0hxLsh/LINE-ALBUM-250729-23.jpg",
+	"https://i.postimg.cc/RVJ659Kh/LINE-ALBUM-250729-24.jpg",
+	"https://i.postimg.cc/5tb6CCGQ/LINE-ALBUM-250729-25.jpg",
+	"https://i.postimg.cc/d1S1pS0G/LINE-ALBUM-250729-26.jpg",
+	"https://i.postimg.cc/PJpxjzL9/LINE-ALBUM-250729-27.jpg",
+	"https://i.postimg.cc/9fLFwNZs/LINE-ALBUM-250729-28.jpg",
+	"https://i.postimg.cc/135zRQND/LINE-ALBUM-250729-29.jpg",
+	"https://i.postimg.cc/pdpJ33WB/LINE-ALBUM-250729-3.jpg",
+	"https://i.postimg.cc/MGgZYf3Y/LINE-ALBUM-250729-30.jpg",
+	"https://i.postimg.cc/SQ6QWs6W/LINE-ALBUM-250729-31.jpg",
+	"https://i.postimg.cc/4yQJZLf8/LINE-ALBUM-250729-32.jpg",
+	"https://i.postimg.cc/fRLwnf6K/LINE-ALBUM-250729-33.jpg",
+	"https://i.postimg.cc/gkMWD6n6/LINE-ALBUM-250729-34.jpg",
+	"https://i.postimg.cc/x80wG0QR/LINE-ALBUM-250729-35.jpg",
+	"https://i.postimg.cc/m2pvMf5Y/LINE-ALBUM-250729-36.jpg",
+	"https://i.postimg.cc/GmBZx7WZ/LINE-ALBUM-250729-37.jpg",
+	"https://i.postimg.cc/yNctwJYj/LINE-ALBUM-250729-38.jpg",
+	"https://i.postimg.cc/J062bZPr/LINE-ALBUM-250729-39.jpg",
+	"https://i.postimg.cc/hG61nMhR/LINE-ALBUM-250729-4.jpg",
+	"https://i.postimg.cc/wjhkzDL1/LINE-ALBUM-250729-40.jpg",
+	"https://i.postimg.cc/N0cp2dB8/LINE-ALBUM-250729-41.jpg",
+	"https://i.postimg.cc/tT7vtDms/LINE-ALBUM-250729-42.jpg",
+	"https://i.postimg.cc/G3WgGFPp/LINE-ALBUM-250729-43.jpg",
+	"https://i.postimg.cc/SNcTrnVf/LINE-ALBUM-250729-44.jpg",
+	"https://i.postimg.cc/432BdVNs/LINE-ALBUM-250729-45.jpg",
+	"https://i.postimg.cc/cCB3KGMw/LINE-ALBUM-250729-46.jpg",
+	"https://i.postimg.cc/XYJ5vhZB/LINE-ALBUM-250729-47.jpg",
+	"https://i.postimg.cc/bwBtSTbC/LINE-ALBUM-250729-48.jpg",
+	"https://i.postimg.cc/tgnV3xNX/LINE-ALBUM-250729-49.jpg",
+	"https://i.postimg.cc/rFZd7sKv/LINE-ALBUM-250729-5.jpg",
+	"https://i.postimg.cc/0QgKcyV7/LINE-ALBUM-250729-50.jpg",
+	"https://i.postimg.cc/VvgSfBmF/LINE-ALBUM-250729-51.jpg",
+	"https://i.postimg.cc/ZRrBgzQ2/LINE-ALBUM-250729-52.jpg",
+	"https://i.postimg.cc/3NY4Qb5R/LINE-ALBUM-250729-53.jpg",
+	"https://i.postimg.cc/Y2zLzkYm/LINE-ALBUM-250729-54.jpg",
+	"https://i.postimg.cc/WbpF9KwY/LINE-ALBUM-250729-55.jpg",
+	"https://i.postimg.cc/02t6hftk/LINE-ALBUM-250729-56.jpg",
+	"https://i.postimg.cc/nhCsxD5v/LINE-ALBUM-250729-57.jpg",
+	"https://i.postimg.cc/0yFzyNRh/LINE-ALBUM-250729-58.jpg",
+	"https://i.postimg.cc/fbdJthMy/LINE-ALBUM-250729-59.jpg",
+	"https://i.postimg.cc/zBpDW2h9/LINE-ALBUM-250729-6.jpg",
+	"https://i.postimg.cc/fLhkYgbK/LINE-ALBUM-250729-60.jpg",
+	"https://i.postimg.cc/50qygqYM/LINE-ALBUM-250729-61.jpg",
+	"https://i.postimg.cc/sxjXNQ7G/LINE-ALBUM-250729-62.jpg",
+	"https://i.postimg.cc/Bbm69SBY/LINE-ALBUM-250729-63.jpg",
+	"https://i.postimg.cc/Wp8tJ8cG/LINE-ALBUM-250729-64.jpg",
+	"https://i.postimg.cc/wTBM5N9S/LINE-ALBUM-250729-65.jpg",
+	"https://i.postimg.cc/28X60563/LINE-ALBUM-250729-66.jpg",
+	"https://i.postimg.cc/x1JdhSJ5/LINE-ALBUM-250729-67.jpg",
+	"https://i.postimg.cc/4xD3TFpg/LINE-ALBUM-250729-68.jpg",
+	"https://i.postimg.cc/mr7gZNSF/LINE-ALBUM-250729-69.jpg",
+	"https://i.postimg.cc/mDSkj2vp/LINE-ALBUM-250729-7.jpg",
+	"https://i.postimg.cc/gJdkxXMt/LINE-ALBUM-250729-70.jpg",
+	"https://i.postimg.cc/2ySkwpN4/LINE-ALBUM-250729-71.jpg",
+	"https://i.postimg.cc/zfwqYDJC/LINE-ALBUM-250729-72.jpg",
+	"https://i.postimg.cc/XqqW5w9L/LINE-ALBUM-250729-73.jpg",
+	"https://i.postimg.cc/RFX9qPJq/LINE-ALBUM-250729-74.jpg",
+	"https://i.postimg.cc/prSHJpZH/LINE-ALBUM-250729-75.jpg",
+	"https://i.postimg.cc/sfHsrNRN/LINE-ALBUM-250729-76.jpg",
+	"https://i.postimg.cc/ZnRbLPF0/LINE-ALBUM-250729-8.jpg",
+	"https://i.postimg.cc/d0YJfcmb/LINE-ALBUM-250729-9.jpg",
+      // ...adicione o restante aqui
+    ];
+
+    const galeria = document.getElementById('galeria');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    links.forEach(link => {
+      const div = document.createElement('div');
+      div.className = 'foto';
+      div.style.backgroundImage = `url(${link})`;
+      div.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = link;
+      });
+      galeria.appendChild(div);
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lightboxImg) {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      }
+    });
+  </script>
+  
+  <script>
+  // Desativa o menu do botão direito do mouse
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Desativa arrastar imagens
+  document.addEventListener('dragstart', function (e) {
+    e.preventDefault();
+  });
+
+  // Previne seleção de texto
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+</script>
+
+</body>
+</html>

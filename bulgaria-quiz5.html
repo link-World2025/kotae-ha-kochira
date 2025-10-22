@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bulgaria quiz 1</title>
+  <title>Bulgaria quiz 5</title>
   <style>
 	body {
 	  margin: 0;
@@ -176,16 +176,17 @@
   </div>
 
 <div class="container">
-  <h2 class="texto-acima-botao">ブルガリア Quiz 1</h2>
-  <p class="texto-acima-botao">ブルガリアの農産物の中で最も生産量が多いのはどれでしょうか？
-</p>
-  <p class="texto-acima-botao">以下の中から一つお選びください。</p>
+  <h2 class="texto-acima-botao">ブルガリア Quiz 5</h2>
+  <p class="texto-acima-botao">下記の文章で「＿＿＿谷」に入る適切な名前を当ててください。ひまわりの開花は6月下旬から7月中旬がピークで、ラベンダー畑と並んで観光客にも人気の風景です。<br>特に「＿＿＿谷」周辺では、黄色と紫のコントラストが美しいと評判です。
 
-  <button class="opcao" data-correto="false">① トウモロコシ</button>
-  <button class="opcao" data-correto="false">② 大麦</button>
-  <button class="opcao" data-correto="false">③ 小麦</button>
-  <button class="opcao" data-correto="false">④ サクランボ</button>
-  <button class="opcao" data-correto="true">⑤ ベリー類</button>
+</p>
+  <p class="texto-acima-botao">文章の「＿＿＿谷」に入る名前を、以下の中から一つお選びください。</p>
+
+  <button class="opcao" data-correto="true">① バラの</button>
+  <button class="opcao" data-correto="false">② ラベンダーの</button>
+  <button class="opcao" data-correto="false">③ ひまわりの</button>
+  <button class="opcao" data-correto="false">④ チュリップの</button>
+  <button class="opcao" data-correto="false">⑤ ローズの</button>
 
   <div class="botao-3d-container">
     <button id="meuBotao">答えはこちら</button>
@@ -227,7 +228,7 @@
       document.querySelector('.opcao[data-correto="true"]').classList.add("correta");
     }
 
-    const mensagem = "正解は「⑤ ベリー類」でした！";
+    const mensagem = "正解は「③ バラの」でした！<br>バラの谷では5～6月にバラが開花し、バラの収穫を祝う「バラ祭り」が毎年6月初旬に開催されます。<br>そして、6～7月にひまわりとラベンダーが咲きます。<br>バラがメインですので「バラの谷」という名前ですが、ひまわりとラベンダーもとても人気で観光客に注目を集めています。";
     let i = 0;
     texto.innerHTML = "";
     texto.style.opacity = 1;
